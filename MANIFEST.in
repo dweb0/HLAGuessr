@@ -12,7 +12,6 @@ exclude .gitignore
 
 
 # Source code, including test and example files
-recursive-include HLAGuessr/Example_validation_data *
 recursive-include HLAGuessr/Training_data *
 prune dist
 prune build

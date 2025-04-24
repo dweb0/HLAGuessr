@@ -6,6 +6,7 @@ import pandas as pd, numpy as np
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from optparse import OptionParser
+from pathlib import Path
         
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -87,12 +88,12 @@ def main():
             pass # Other string passed as the delimiter.
         
     
-    process = Processing(chain,options.alpha_infile,options.beta_infile,delimiter)    
-    main_path = os.getcwd()
+    process = Processing(chain,options.alpha_infile,options.beta_infile,delimiter)
+    main_path = Path(__file__).parents[0]
     hla_threshold=1
     grouping = False
     untyped = True
-    f_params = main_path + '/Training_data/classifier_params_alpha+beta.tsv'
+    f_params = main_path / 'Training_data/classifier_params_alpha+beta.tsv'
     df_param = pd.read_csv(f_params,delimiter='\t')
     
     hla_set = []
@@ -124,9 +125,6 @@ def main():
         unique_ps = [list(p) for p in unique_ps]
 
         for p in unique_ps:
-            
-            print('** Individual ' +p[0]+ ': **')
-
             for hla_target in hla_set:
                 
                 ev = GetProbabilities(hla_target,chain,hla_threshold,

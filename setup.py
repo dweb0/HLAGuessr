@@ -29,11 +29,10 @@ setup(name='hlaguessr',
             'Programming Language :: Python :: 3.6',
             ],
       packages=find_packages(),
-      install_requires=['numpy','scikit-learn','pandas','tqdm'], # 'multiprocessing',
+      install_requires=['numpy','scikit-learn','pandas'], # 'multiprocessing',
       data_files = data_files_to_include,
       package_data = {
             'HLAGuessr.Training_data': ['*'],
-            'HLAGuessr.Example_validation_data': ['*.tsv'],
             },
       include_package_data=True,
       entry_points = {'console_scripts': [

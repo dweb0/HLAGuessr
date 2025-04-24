@@ -28,7 +28,7 @@ class GetProbabilities(object):
             self.dic_p_test,self.n_pat_test = dm.test_patients_database(ps)
             self.df_w_sign_test = pm.look_for_tcr_index(self.data_test, self.sign_tcr)
             if len(self.df_w_sign_test)==0:
-                print('No HLA-related TCRs have been found in your repertoire')
+                #print('No HLA-related TCRs have been found in your repertoire')
                 self.hla_prob = 'N/A'
                 self.hla_output = False
             else:

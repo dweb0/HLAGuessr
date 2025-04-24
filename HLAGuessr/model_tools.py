@@ -2,22 +2,18 @@ import numpy as np
 import pandas as pd
 import itertools
 from functools import partial
-from multiprocessing import Pool, cpu_count
-from tqdm import tqdm
 
 def applyParallel(sign_tcr, df_training, func):
 
-    cores = cpu_count()
-    list_split = np.array_split(np.array(sign_tcr), cores)
+    list_split = np.array_split(np.array(sign_tcr), 1)
     func_arg = partial(func, df_training)
-    with Pool(cpu_count()) as p:
-        ret_list = list(tqdm(p.imap(func_arg, list_split)))
+    ret_list = list(map(func_arg, list_split))
     return pd.concat(ret_list)
 
 def get_tcr_index(df_training,sign_tcr):
 
     i = []
-    for tcr in tqdm(sign_tcr):
+    for tcr in sign_tcr:
         i.append(df_training.index[df_training['cdr3+v_family']==tcr].tolist())
     index = list(itertools.chain(*i))
     df_training.reset_index(drop=True,inplace=True)
